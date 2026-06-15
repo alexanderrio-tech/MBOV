@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HOT LIST 🔥 — Møller Bil Oslo Vest</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;800&family=Space+Mono:wght@400;700&display=swap');
+
+    :root {
+      --bg: #0a0a0f;
+      --surface: #12121a;
+      --card: #1a1a26;
+      --border: #2a2a3e;
+      --blue: #4ba82e;
+      --blue-glow: rgba(75, 168, 46, 0.25);
+      --fire: #ff4d00;
+      --fire2: #ff9500;
+      --gold: #ffd000;
+      --text: #f0f0f8;
+      --muted: #8888aa;
+      --white: #ffffff;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Space Grotesk', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem 1rem 4rem;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 50% at 50% 0%, rgba(75,168,46,0.18) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 20% 100%, rgba(255,77,0,0.12) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .logo-bar {
+      position: absolute;
+      top: 1.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.25em;
+      color: var(--muted);
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .flame-container {
+      position: relative;
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .flame {
+      font-size: clamp(3rem, 10vw, 5rem);
+      animation: flicker 1.5s ease-in-out infinite alternate;
+    }
+    .flame:nth-child(2) { animation-delay: 0.3s; animation-duration: 1.2s; }
+    .flame:nth-child(3) { animation-delay: 0.6s; animation-duration: 1.8s; }
+
+    @keyframes flicker {
+      0%   { transform: scale(1) rotate(-2deg);   filter: brightness(1); }
+      50%  { transform: scale(1.08) rotate(1deg); filter: brightness(1.3); }
+      100% { transform: scale(0.96) rotate(2deg); filter: brightness(0.9); }
+    }
+
+    .eyebrow {
+      font-family: 'Space Mono', monospace;
+      font-size: clamp(0.65rem, 1.5vw, 0.8rem);
+      letter-spacing: 0.3em;
+      color: var(--blue);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      font-size: clamp(2.8rem, 9vw, 7rem);
+      font-weight: 800;
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.2rem;
+    }
+
+    h1 span.hot { color: var(--fire); }
+    h1 span.list { color: var(--white); }
+
+    .sub {
+      font-size: clamp(1rem, 2.5vw, 1.4rem);
+      color: var(--muted);
+      max-width: 520px;
+      line-height: 1.55;
+      margin-bottom: 2.5rem;
+    }
+
+    .sub strong { color: var(--text); }
+
+    /* ── BONUS BADGE ── */
+    .bonus-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: linear-gradient(135deg, rgba(255,208,0,0.15), rgba(255,149,0,0.1));
+      border: 1.5px solid var(--gold);
+      border-radius: 100px;
+      padding: 0.7rem 1.4rem;
+      font-weight: 700;
+      font-size: clamp(0.85rem, 2vw, 1rem);
+      color: var(--gold);
+      margin-bottom: 2rem;
+      animation: pulse-gold 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse-gold {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(255,208,0,0.3); }
+      50%       { box-shadow: 0 0 0 10px rgba(255,208,0,0); }
+    }
+
+    /* ── COUNTDOWN ── */
+    .countdown-wrap {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.2rem 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .countdown-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+    }
+
+    .countdown-digits {
+      display: flex;
+      gap: 1.2rem;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .cd-unit {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .cd-num {
+      font-family: 'Space Mono', monospace;
+      font-size: clamp(1.8rem, 5vw, 2.8rem);
+      font-weight: 700;
+      color: var(--fire);
+      line-height: 1;
+    }
+
+    .cd-lbl {
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-top: 0.2rem;
+    }
+
+    .cd-sep {
+      font-family: 'Space Mono', monospace;
+      font-size: 1.8rem;
+      color: var(--border);
+      line-height: 1;
+      padding-bottom: 0.4rem;
+    }
+
+    .scroll-cta {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      color: var(--muted);
+      text-transform: uppercase;
+      animation: bounce 2s ease-in-out infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(6px); }
+    }
+
+    /* ── VIDEO SECTION ── */
+    .video-section {
+      padding: 5rem 1.5rem;
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .section-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      color: var(--blue);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.6rem, 4vw, 2.8rem);
+      font-weight: 800;
+      margin-bottom: 1rem;
+      letter-spacing: -0.02em;
+    }
+
+    .video-wrapper {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      aspect-ratio: 16/9;
+      background: var(--card);
+      border: 1px solid var(--border);
+      box-shadow: 0 0 60px rgba(75,168,46,0.15);
+      margin-top: 2rem;
+    }
+
+    .video-wrapper iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .video-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      gap: 1rem;
+      color: var(--muted);
+      padding: 2rem;
+    }
+
+    .play-btn {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: var(--blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .play-btn:hover {
+      transform: scale(1.08);
+      box-shadow: 0 0 30px var(--blue-glow);
+    }
+
+    .video-placeholder p {
+      font-size: 0.9rem;
+      max-width: 360px;
+      line-height: 1.5;
+    }
+
+    /* ── CAR LIST ── */
+    .list-section {
+      padding: 4rem 1.5rem 6rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .list-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .list-count {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    .list-count span {
+      color: var(--fire);
+      font-size: 1.4rem;
+      display: block;
+      margin-bottom: 0.2rem;
+    }
+
+    /* table */
+    .car-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0 6px;
+    }
+
+    .car-table thead th {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 0.4rem 1rem 0.8rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .car-table thead th:last-child { text-align: right; }
+
+    .car-table tbody tr {
+      background: var(--card);
+      border-radius: 10px;
+      transition: background 0.15s, transform 0.15s;
+      cursor: default;
+    }
+
+    .car-table tbody tr:hover {
+      background: #1f1f2e;
+      transform: translateY(-1px);
+    }
+
+    .car-table tbody tr.featured {
+      background: linear-gradient(90deg, rgba(26,107,255,0.1), var(--card));
+      border-left: 3px solid var(--blue);
+    }
+
+    .car-table td {
+      padding: 1rem 1rem;
+      font-size: 0.9rem;
+    }
+
+    .car-table td:first-child {
+      border-radius: 10px 0 0 10px;
+      padding-left: 1.2rem;
+    }
+
+    .car-table td:last-child {
+      border-radius: 0 10px 10px 0;
+      text-align: right;
+      padding-right: 1.2rem;
+    }
+
+    .car-id {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    .car-model {
+      font-weight: 700;
+      color: var(--white);
+      font-size: 0.95rem;
+    }
+
+    .car-variant {
+      font-size: 0.75rem;
+      color: var(--blue);
+      font-weight: 500;
+      margin-top: 0.1rem;
+    }
+
+    .car-color {
+      font-size: 0.8rem;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .color-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .car-price {
+      font-family: 'Space Mono', monospace;
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--white);
+    }
+
+    .fire-tag {
+      display: inline-block;
+      background: rgba(255,77,0,0.15);
+      color: var(--fire);
+      font-size: 0.65rem;
+      font-family: 'Space Mono', monospace;
+      letter-spacing: 0.1em;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      border: 1px solid rgba(255,77,0,0.3);
+      margin-left: 0.4rem;
+      vertical-align: middle;
+    }
+
+    .bonus-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      background: rgba(255,208,0,0.1);
+      color: var(--gold);
+      font-size: 0.62rem;
+      font-family: 'Space Mono', monospace;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      border: 1px solid rgba(255,208,0,0.25);
+      margin-top: 0.35rem;
+    }
+
+    .june-pill {
+      display: inline-block;
+      background: var(--blue);
+      color: #fff;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+    }
+
+    /* mobile */
+    @media (max-width: 700px) {
+      .car-table thead { display: none; }
+      .car-table, .car-table tbody, .car-table tr, .car-table td {
+        display: block;
+        width: 100%;
+      }
+      .car-table tr {
+        border-radius: 10px;
+        margin-bottom: 8px;
+        padding: 0.8rem 1rem;
+      }
+      .car-table td { padding: 0.2rem 0; border-radius: 0 !important; }
+      .car-table td:last-child { text-align: left; margin-top: 0.5rem; }
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 2rem 1rem 3rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      color: var(--border);
+      text-transform: uppercase;
+    }
+
+    /* ── GRID LINES ── */
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.012) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.012) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="logo-bar">Møller Bil Oslo Vest &nbsp;·&nbsp; Juni 2025</div>
+
+  <div class="flame-container">
+    <div class="flame">🔥</div>
+    <div class="flame">🔥</div>
+    <div class="flame">🔥</div>
+  </div>
+
+  <div class="eyebrow">Lagerbil-kampanje · Juni</div>
+
+  <h1>
+    <span class="hot">HOT</span><br>
+    <span class="list">LIST</span>
+  </h1>
+
+  <p class="sub">
+    <strong>Disse bilene vil ut – nå.</strong><br>
+    Knallpriser på lager, ekstra motivasjon på 2&nbsp;000&nbsp;kr per bil levert i juni.
+    Ingen unnskyldninger. Bare resultater.
+  </p>
+
+  <div class="bonus-badge">
+    ⚡ 2 000 kr ekstra bonus per bil levert i juni
+  </div>
+
+  <div class="countdown-wrap">
+    <div class="countdown-label">Tid igjen av juni</div>
+    <div class="countdown-digits">
+      <div class="cd-unit">
+        <div class="cd-num" id="cd-days">--</div>
+        <div class="cd-lbl">Dager</div>
+      </div>
+      <div class="cd-sep">:</div>
+      <div class="cd-unit">
+        <div class="cd-num" id="cd-hours">--</div>
+        <div class="cd-lbl">Timer</div>
+      </div>
+      <div class="cd-sep">:</div>
+      <div class="cd-unit">
+        <div class="cd-num" id="cd-mins">--</div>
+        <div class="cd-lbl">Min</div>
+      </div>
+      <div class="cd-sep">:</div>
+      <div class="cd-unit">
+        <div class="cd-num" id="cd-secs">--</div>
+        <div class="cd-lbl">Sek</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-cta">↓ &nbsp; Se lagerbilene &nbsp; ↓</div>
+</section>
+
+<!-- ── VIDEO ── -->
+<section class="video-section">
+  <div class="section-label">Kampanjefilm</div>
+  <h2 class="section-title">Ingen tid å miste</h2>
+  <p style="color:var(--muted); max-width:520px; margin:0 auto; font-size:0.95rem; line-height:1.6;">
+    Disse bilene er klare for levering. Kunden vinner, du vinner – sett inn videoen her og gi det en ekstra dytt.
+  </p>
+
+  <div class="video-wrapper">
+    <!-- Bytt ut src med riktig YouTube/Vimeo embed-lenke -->
+    <!--
+    <iframe src="https://www.youtube.com/shorts/hOmhxpmrkIc"
+            allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    -->
+    <div class="video-placeholder">
+      <div class="play-btn">▶</div>
+      <p>Lim inn embed-lenke til kampanjevideo her.<br>
+         Bytt ut <code style="color:var(--blue);">&lt;!-- iframe --&gt;</code> i koden med YouTube/Vimeo-embed.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── CAR LIST ── -->
+<section class="list-section">
+  <div class="list-header">
+    <div>
+      <div class="section-label">Tilgjengelige biler</div>
+      <h2 class="section-title">Lagerbiler som vil ut 🔥</h2>
+    </div>
+    <div class="list-count">
+      <span>17</span>biler på lager
+    </div>
+  </div>
+
+  <table class="car-table">
+    <thead>
+      <tr>
+        <th>Nr.</th>
+        <th>Modell</th>
+        <th>Farge</th>
+        
+        <th>Pris (kr)</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr>
+        <td><div class="car-id">9296</div></td>
+        <td>
+          <div class="car-model">ENYAQ 85X</div>
+          <div class="car-variant">· Uke 41</div>
+          <div class="bonus-tag">⭐ 2 000 kr bonus</div>
+        </td>
+        <td><div class="car-color"><span class="color-dot" style="background:#555"></span>Graphite</div></td>
+        
+        <td><div class="car-price">556&nbsp;652 kr <span class="fire-tag">HOT</span></div></td>
+      </tr>
+
+      <tr>
+        <td><div class="car-id">9762</div></td>
+        <td>
+          <div class="car-model">ELROQ 60</div>
+          <div class="car-variant">· Uke 42</div>
+          <div class="bonus-tag">⭐ 2 000 kr bonus</div>
+        </td>
+        <td><div class="car-color"><span class="color-dot" style="background:#2255cc"></span>Energy Blue</div></td>
+        
+        <td><div class="car-price">349&nbsp;924 kr <span class="fire-tag">HOT</span></div></td>
+      </tr>
+
+      <tr>
+        <td><div class="car-id">10213</div></td>
+        <td>
+          <div class="car-model">ELROQ 85X</div>
+          <div class="car-variant">· Uke 41</div>
+          <div class="bonus-tag">⭐ 2 000 kr bonus</div>
+        </td>
+        <td><div class="car-color"><span class="color-dot" style="background:#555"></span>Graphite</div></td>
+        
+        <td><div class="car-price">458&nbsp;938 kr <span class="fire-tag">HOT</span></div></td>
+      </tr>
+
+      <tr>
+        <td><div class="car-id">11669</div></td>
+        <td>
+          <div class="car-model">ENYAQ 85X</div>
+          <div class="car-variant">· Uke 42</div>
+          <div class="bonus-tag">⭐ 2 000 kr bonus</div>
+        </td>
+        <td><div class="car-color"><span class="color-dot" style="background:#111"></span>Black Magic</div></td>
+        
+        <td><div class="car-price">506&nbsp;652 kr <span class="fire-tag">HOT</span></div></td>
+      </tr>
+
+      <tr>
+        <td><div class="car-id">11670</div></td>
+        <td>
+          <div class="car-model">ENYAQ 85X</div>
+          <div class="car-variant">· Uke 42</div>
+          <div class="bonus-tag">⭐ 2 000 kr bonus</div>
+        </td>
+        <td><div class="car-color"><span class="color-dot" style="background:#111"></span>Black Magic</div></td>
+        
+        <td><div class="car-price">506&nbsp;652 kr <span class="fire-tag">HOT</span></div></td>
+      </tr>
+
+      <tr>
+        <td><div class="car-id">11675</div></td>
+        <td>
+          <div class="car-model">ENYAQ 85X</div>
+          <div class="car-variant">· Uke 42</div>
+          <div class="bonus-tag">⭐ 2 000 kr bonus</div>
+        </td>
+        <td><div class="car-color"><span class="color-dot" style="background:#555"></span>Smokey Dark</div></td>
+        
+        <td><div class="car-price">502&nbsp;852 kr <span class="fire-tag">HOT</span></div></td>
+      </tr>
+
+      <tr>
+        <td><div class="car-id">11692</div></td>
+        <td>
+          <div class="car-model">ELROQ 85X</div>
+          <div class="car-variant">· Uke 42</div>
+          <div class="bonus-tag">⭐ 2 000 kr bonus</div>
+        </td>
+        <td><div class="car-color"><span class="color-dot" style="background:#111"></span>Black Magic</div></td>
+        
+        <td><div class="car-price">460&nbsp;788 kr <span class="fire-tag">HOT</span></div></td>
+      </tr>
+
+      <tr>
+        <td><div class="car-id">11694</div></td>
+        <td>
+          <div class="car-model">ELROQ 85X</div>
+          <div class="car-variant">· Uke 42</div>
+          <div class="bonus-tag">⭐ 2 000 kr bonus</div>
+        </td>
+        <td><div class="car-color"><span class="color-dot" style="background:#555"></span>Graphite</div></td>
+        
+        <td><div class="car-price">460&nbsp;788 kr <span class="fire-tag">HOT</span></div></td>
+      </tr>
+
+      <tr>
+        <td><div class="car-id">11711</div></td>
+        <td>
+          <div class="car-model">ELROQ 60</div>
+          <div class="car-variant">· Uke 42</div>
+          <div class="bonus-tag">⭐ 2 000 kr bonus</div>
+        </td>
+        <td><div class="car-color"><span class="color-dot" style="background:#111"></span>Black Magic</div></td>
+        
+        <td><div class="car-price">356&nbsp;724 kr <span class="fire-tag">HOT</span></div></td>
+      </tr>
+
+      <tr>
+        <td><div class="car-id">11717</div></td>
+        <td>
+          <div class="car-model">ENYAQ 85X</div>
+          <div class="car-variant">· Uke 42</div>
+          <div class="bonus-tag">⭐ 2 000 kr bonus</div>
+        </td>
+        <td><div class="car-color"><span class="color-dot" style="background:#111"></span>Black Magic</div></td>
+        
+        <td><div class="car-price">529&nbsp;352 kr <span class="fire-tag">HOT</span></div></td>
+      </tr>
+
+      <tr class="featured">
+        <td><div class="car-id">66</div></td>
+        <td>
+          <div class="car-model">ENYAQ 85X</div>
+          <div class="car-variant">Sportline</div>
+          <div class="bonus-tag">⭐ 2 000 kr bonus</div>
+        </td>
+        <td><div class="car-color"><span class="color-dot" style="background:#555"></span>Graphite</div></td>
+        
+        <td><div class="car-price">516&nbsp;862 kr <span class="fire-tag">HOT</span></div></td>
+      </tr>
+
+      <tr class="featured">
+        <td><div class="car-id">67</div></td>
+        <td>
+          <div class="car-model">ENYAQ 85X</div>
+          <div class="car-variant">Sportline</div>
+          <div class="bonus-tag">⭐ 2 000 kr bonus</div>
+        </td>
+        <td><div class="car-color"><span class="color-dot" style="background:#555"></span>Graphite</div></td>
+        
+        <td><div class="car-price">518&nbsp;762 kr <span class="fire-tag">HOT</span></div></td>
+      </tr>
+
+      <tr>
+        <td><div class="car-id">69</div></td>
+        <td>
+          <div class="car-model">ELROQ RS</div>
+          <div class="car-variant">· Uke 41</div>
+          <div class="bonus-tag">⭐ 2 000 kr bonus</div>
+        </td>
+        <td><div class="car-color"><span class="color-dot" style="background:#888"></span>Steel Grey</div></td>
+        
+        <td><div class="car-price">497&nbsp;252 kr <span class="fire-tag">HOT</span></div></td>
+      </tr>
+
+      <tr>
+        <td><div class="car-id">1166</div></td>
+        <td>
+          <div class="car-model">ENYAQ RS</div>
+          <div class="car-variant">· Uke 42</div>
+          <div class="bonus-tag">⭐ 2 000 kr bonus</div>
+        </td>
+        <td><div class="car-color"><span class="color-dot" style="background:#7a9e6e"></span>Olive Green</div></td>
+        
+        <td><div class="car-price">591&nbsp;560 kr <span class="fire-tag">HOT</span></div></td>
+      </tr>
+
+      <tr>
+        <td><div class="car-id">1206</div></td>
+        <td>
+          <div class="car-model">ENYAQ 85X</div>
+          <div class="car-variant">· Uke 42</div>
+          <div class="bonus-tag">⭐ 2 000 kr bonus</div>
+        </td>
+        <td><div class="car-color"><span class="color-dot" style="background:#555"></span>Graphite</div></td>
+        
+        <td><div class="car-price">530&nbsp;152 kr <span class="fire-tag">HOT</span></div></td>
+      </tr>
+
+      <tr>
+        <td><div class="car-id">1827</div></td>
+        <td>
+          <div class="car-model">ENYAQ 85X</div>
+          <div class="car-variant">· Uke 42</div>
+          <div class="bonus-tag">⭐ 2 000 kr bonus</div>
+        </td>
+        <td><div class="car-color"><span class="color-dot" style="background:#555"></span>Graphite</div></td>
+        
+        <td><div class="car-price">556&nbsp;652 kr <span class="fire-tag">HOT</span></div></td>
+      </tr>
+
+      <tr class="featured">
+        <td><div class="car-id">1848</div></td>
+        <td>
+          <div class="car-model">ENYAQ 85X</div>
+          <div class="car-variant">Sportline</div>
+          <div class="bonus-tag">⭐ 2 000 kr bonus</div>
+        </td>
+        <td><div class="car-color"><span class="color-dot" style="background:#111"></span>Black Magic</div></td>
+        
+        <td><div class="car-price">516&nbsp;862 kr <span class="fire-tag">HOT</span></div></td>
+      </tr>
+
+    </tbody>
+  </table>
+
+  <div style="margin-top:3rem; text-align:center; padding: 2rem; background:var(--surface); border-radius:16px; border:1px solid var(--border);">
+    <div style="font-size:2rem; margin-bottom:0.8rem;">🏆</div>
+    <div style="font-family:'Space Mono',monospace; font-size:0.65rem; letter-spacing:0.2em; color:var(--muted); text-transform:uppercase; margin-bottom:0.5rem;">Totalt potensial</div>
+    <div style="font-size:clamp(1.6rem, 4vw, 2.4rem); font-weight:800; color:var(--gold); font-family:'Space Mono',monospace;">34&nbsp;000 kr</div>
+    <div style="color:var(--muted); font-size:0.85rem; margin-top:0.4rem;">i ekstra bonus — om alle 17 biler leveres i juni</div>
+  </div>
+</section>
+
+<footer>
+  Møller Bil Oslo Vest &nbsp;·&nbsp; Kampanje juni 2025 &nbsp;·&nbsp; Internt bruk
+</footer>
+
+<script>
+  // Countdown to end of June 30
+  function updateCountdown() {
+    const now = new Date();
+    const endOfJune = new Date(now.getFullYear(), 5, 30, 23, 59, 59);
+    const diff = endOfJune - now;
+
+    if (diff <= 0) {
+      document.getElementById('cd-days').textContent  = '00';
+      document.getElementById('cd-hours').textContent = '00';
+      document.getElementById('cd-mins').textContent  = '00';
+      document.getElementById('cd-secs').textContent  = '00';
+      return;
+    }
+
+    const days  = Math.floor(diff / 86400000);
+    const hours = Math.floor((diff % 86400000) / 3600000);
+    const mins  = Math.floor((diff % 3600000) / 60000);
+    const secs  = Math.floor((diff % 60000) / 1000);
+
+    document.getElementById('cd-days').textContent  = String(days).padStart(2,'0');
+    document.getElementById('cd-hours').textContent = String(hours).padStart(2,'0');
+    document.getElementById('cd-mins').textContent  = String(mins).padStart(2,'0');
+    document.getElementById('cd-secs').textContent  = String(secs).padStart(2,'0');
+  }
+
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+</script>
+</body>
+</html>
