@@ -201,6 +201,12 @@
       color: var(--muted);
       text-transform: uppercase;
       animation: bounce 2s ease-in-out infinite;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .scroll-cta:hover {
+      color: var(--blue);
     }
 
     @keyframes bounce {
@@ -543,7 +549,7 @@
     </div>
   </div>
 
-  <div class="scroll-cta">↓ &nbsp; Se lagerbilene &nbsp; ↓</div>
+  <a href="#car-list" class="scroll-cta">↓ &nbsp; Se lagerbilene &nbsp; ↓</a>
 </section>
 
 <!-- ── VIDEO ── -->
@@ -561,7 +567,7 @@
 </section>
 
 <!-- ── CAR LIST ── -->
-<section class="list-section">
+<section class="list-section" id="car-list">
   <div class="list-header">
     <div>
       <div class="section-label">Tilgjengelige biler</div>
